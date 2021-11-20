@@ -5,7 +5,7 @@ import web.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 @Component
 public class UserList {
@@ -21,13 +21,11 @@ public class UserList {
         list.add(new User(5L, "Lamborghini", "2010", (byte) 19));
     }
 
-    public List<User> select(String count){
-        if (count == null) {
-            return list;
-        } else {
-            return list.stream()
-                    .limit(Integer.parseInt(count))
-                    .collect(Collectors.toList());
-        }
+    public List<User> getAllUsers() {
+        return list;
+    }
+
+    public User getUserById(Long id){
+        return list.stream().filter(user -> Objects.equals(user.getId(), id)).findAny().orElse(null);
     }
 }
