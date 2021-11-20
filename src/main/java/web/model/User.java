@@ -6,7 +6,7 @@ public class User {
 
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
 //    @Column
     private String firstName;
@@ -15,23 +15,23 @@ public class User {
     private String lastName;
 
 //    @Column
-    private Byte age;
+    private String age;
 
-//    public User() {
-//    }
-
-    public User(Long id, String firstName, String lastName, Byte age) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
+    public User() {
     }
 
-    public Long getId() {
+    public User(int id, String firstName/*, String lastName, String age*/) {
+        this.id = id;
+        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.age = age;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -51,11 +51,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Byte getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(Byte age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
