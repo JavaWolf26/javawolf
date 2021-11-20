@@ -34,4 +34,13 @@ public class UserList {
         user.setId(++COUNT);
         list.add(user);
     }
+
+    public void update(int id, User updateUser){
+        User userUpdated = getUserById(id);
+        userUpdated.setFirstName(updateUser.getFirstName());
+    }
+
+    public void delete(int id){
+        list.removeIf(p -> p.getId() == id);
+    }
 }

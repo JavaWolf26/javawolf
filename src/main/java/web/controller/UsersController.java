@@ -41,6 +41,24 @@ public class UsersController {
         userList.save(user);
         return "redirect:/users";
     }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id){
+        model.addAttribute("user", userList.getUserById(id));
+        return "edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id){
+        userList.update(id, user);
+        return "redirect:/users";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id){
+        userList.delete(id);
+        return "redirect:/users";
+    }
 }
 
 //<label for="lastName"></label>
