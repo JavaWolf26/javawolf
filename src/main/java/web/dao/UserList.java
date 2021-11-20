@@ -15,11 +15,11 @@ public class UserList {
 
     {
         list = new ArrayList<>();
-        list.add(new User(++COUNT, "Toyota"/*, "2010", "100"*/));
-        list.add(new User(++COUNT, "Ford"/*, "2012", "14"*/));
-        list.add(new User(++COUNT, "Bugatti"/*, "2015", "25"*/));
-        list.add(new User(++COUNT, "Ferrari"/*, "2011", "18"*/));
-        list.add(new User(++COUNT, "Lamborghini"/*, "2010", "19"*/));
+        list.add(new User(++COUNT, "Toyota", "Toyota", 11, "toyota@email.ru"));
+        list.add(new User(++COUNT, "Ford", "Ford", 14, "ford@email.ru"));
+        list.add(new User(++COUNT, "Bugatti", "Bugatti", 13, "bugatti@email.ru"));
+        list.add(new User(++COUNT, "Ferrari", "Ferrari", 18, "ferrari@email.ru"));
+        list.add(new User(++COUNT, "Lamborghini", "Lamborghini", 19, "lamborghini@email.ru"));
     }
 
     public List<User> getAllUsers() {
@@ -38,6 +38,9 @@ public class UserList {
     public void update(int id, User updateUser){
         User userUpdated = getUserById(id);
         userUpdated.setFirstName(updateUser.getFirstName());
+        userUpdated.setLastName(updateUser.getLastName());
+        userUpdated.setAge(updateUser.getAge());
+        userUpdated.setEmail(updateUser.getEmail());
     }
 
     public void delete(int id){
