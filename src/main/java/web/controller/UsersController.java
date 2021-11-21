@@ -6,29 +6,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import web.dao.UserList;
+import web.dao.UserDao;
 import web.model.User;
 
 @Controller
 @RequestMapping("/users")
 public class UsersController {
 
-    private final UserList userList;
+    private final UserDao userDao;
 
     @Autowired
-    public UsersController(UserList userList) {
-        this.userList = userList;
+    public UsersController(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     @GetMapping()
     public String printUsers(Model model) {
-        model.addAttribute("users", userList.getAllUsers());
+        model.addAttribute("users", userDao.getAllUsers());
         return "users";
     }
 
     @GetMapping("/{id}")
     public String printUserById(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userList.getUserById(id));
+        model.addAttribute("user", userDao.getUserById(id));
         return "userbyid";
     }
 
@@ -44,13 +44,13 @@ public class UsersController {
         if (bindingResult.hasErrors()) {
             return "newuser";
         }
-        userList.save(user);
+        userDao.save(user);
         return "redirect:/users";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("user", userList.getUserById(id));
+        model.addAttribute("user", userDao.getUserById(id));
         return "edit";
     }
 
@@ -60,13 +60,13 @@ public class UsersController {
         if (bindingResult.hasErrors()) {
             return "edit";
         }
-        userList.update(id, user);
+        userDao.update(id, user);
         return "redirect:/users";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        userList.delete(id);
+        userDao.delete(id);
         return "redirect:/users";
     }
 }
