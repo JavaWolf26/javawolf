@@ -1,8 +1,7 @@
 package web.dao;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
@@ -11,42 +10,36 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final SessionFactory sessionFactory;
 
     @Autowired
-    public UserDaoImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public UserDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<User> getAllUsers() {
-        return jdbcTemplate.query("SELECT * FROM users", new BeanPropertyRowMapper<>(User.class));
+        return sessionFactory.getCurrentSession().createQuery("from User").getResultList();
     }
 
     @Override
     public User getUserById(int id) {
-        return jdbcTemplate.query("SELECT * FROM users WHERE id=?", new BeanPropertyRowMapper<>(User.class),
-                        new Object[]{id})
-                .stream()
-                .findAny()
-                .orElse(null);
+        return sessionFactory.getCurrentSession().get(User.class, id);
     }
 
     @Override
-    public void save(User user) {
-        jdbcTemplate.update("INSERT INTO users (firstName, lastName, age, email) VALUES(?, ?, ?, ?)",
-                user.getFirstName(), user.getLastName(), user.getAge(), user.getEmail());
+    public void saveUser(User user) {
+        sessionFactory.getCurrentSession().save(user);
     }
 
     @Override
-    public void update(int id, User updateUser) {
-        jdbcTemplate.update("UPDATE users SET firstName=?, lastName=?, age=?, email=? WHERE id=?",
-                updateUser.getFirstName(), updateUser.getLastName(), updateUser.getAge(),
-                updateUser.getEmail(), id);
+    public void updateUser(User user) {
+        sessionFactory.getCurrentSession().update(user);
     }
 
     @Override
-    public void delete(int id) {
-        jdbcTemplate.update("DELETE FROM users WHERE id=?", id);
+    public void deleteUser(User user) {
+        sessionFactory.getCurrentSession().delete(user);
     }
 }

@@ -1,76 +1,42 @@
 package web.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
-//@Entity
-//@Table(name = "users")
+@Setter
+@Getter
+@Entity
+@Table(name = "users")
 public class User {
 
-    //    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    //    @Column
+    @Column
     @NotEmpty(message = "FirstName should no be empty")
     @Size(min = 2, max = 30, message = "FirstName should be between 2 and 30 characters")
     @Pattern(regexp = "[A-Z][a-zA-Z\\s\\-]*", message = "FirstName must begin with a capital letter")
     private String firstName;
 
-    //    @Column
+    @Column
     @NotEmpty(message = "LastName should no be empty")
     @Size(min = 2, max = 30, message = "LastName should be between 2 and 15 characters")
     @Pattern(regexp = "[A-Z][a-zA-Z\\s\\-]*", message = "LastName must begin with a capital letter")
     private String lastName;
 
-    //    @Column
+    @Column
     @Min(value = 0, message = "Age should be greater than 0")
     private int age;
 
-    //    @Column
+    @Column
     @NotEmpty(message = "Email should no be empty")
     @Email(message = "Email should be valid")
     private String email;
 
     public User() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

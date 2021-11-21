@@ -22,7 +22,7 @@ public class UsersController {
     }
 
     @GetMapping()
-    public String printUsers(Model model) {
+    public String printAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "users";
     }
@@ -30,44 +30,42 @@ public class UsersController {
     @GetMapping("/{id}")
     public String printUserById(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "userbyid";
+        return "user";
     }
 
     @GetMapping("/new")
-    public String saveUser(Model model) {
+    public String createUser(Model model) {
         model.addAttribute("user", new User());
-        return "newuser";
+        return "new";
     }
 
     @PostMapping()
-    public String createUser(@ModelAttribute("user") @Valid User user,
-                             BindingResult bindingResult) {
+    public String saveUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "newuser";
+            return "new";
         }
-        userService.save(user);
+        userService.saveUser(user);
         return "redirect:/users";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
+    public String editUser(Model model, @PathVariable("id") int id) {
         model.addAttribute("user", userService.getUserById(id));
         return "edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") @Valid User user,
-                         BindingResult bindingResult, @PathVariable("id") int id) {
+    public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "edit";
         }
-        userService.update(id, user);
+        userService.updateUser(user);
         return "redirect:/users";
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
-        userService.delete(id);
+    public String deleteUser(User user) {
+        userService.deleteUser(user);
         return "redirect:/users";
     }
 }
