@@ -71,10 +71,3 @@ public class UsersController {
     }
 }
 
-//<label for="lastName"></label>
-//<input type="text" th:field="*{lastName}" id="lastName"/>
-//<label for="age"></label>
-//<input type="text" th:field="*{age}" id="age"/>
-
-//<p th:text="${user.getLastName()}"></p>
-//<p th:text="${user.getAge()}"></p>
