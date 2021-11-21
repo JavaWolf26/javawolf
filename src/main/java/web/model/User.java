@@ -26,19 +26,12 @@ public class User {
     @Min(value = 0, message = "Age should be greater than 0")
     private int age;
 
+    //    @Column
     @NotEmpty(message = "Email should no be empty")
     @Email(message = "Email should be valid")
     private String email;
 
     public User() {
-    }
-
-    public User(int id, String firstName, String lastName, int age, String email) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.email = email;
     }
 
     public int getId() {
@@ -80,14 +73,4 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    //    @Override
-//    public String toString() {
-//        return "\nUser {" +
-//                "id = " + id +
-//                ", firstName = '" + firstName + '\'' +
-//                ", lastName = '" + lastName + '\'' +
-//                ", age = '" + age + '\'' +
-//                '}';
-//    }
 }
