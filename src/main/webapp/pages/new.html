@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>newuser</title>
+    <title>New User</title>
     <link rel="icon" type="image/png" href="/pages/img.png"/>
 </head>
 <body>
@@ -23,7 +23,8 @@
     <input type="text" th:field="*{email}" id="email"/>
     <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
     <br/>
-    <input type="submit" value="Create">
+    <input type="submit" value="Create User">
 </form>
+<a href="/users">Back to main menu</a>
 </body>
 </html>

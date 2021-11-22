@@ -14,7 +14,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column
     @NotEmpty(message = "FirstName should no be empty")
@@ -30,7 +30,7 @@ public class User {
 
     @Column
     @Min(value = 0, message = "Age should be greater than 0")
-    private int age;
+    private Byte age;
 
     @Column
     @NotEmpty(message = "Email should no be empty")

@@ -34,7 +34,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
-        return new Filter[] {characterEncodingFilter};
+        return new Filter[]{characterEncodingFilter};
     }
 
     @Override
@@ -44,7 +44,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         registerHiddenFieldFilterHttp(aServletContext);
     }
 
-    private void registerCharacterEncodingFilterEncoding(ServletContext aContext){
+    private void registerCharacterEncodingFilterEncoding(ServletContext aContext) {
         FilterRegistration.Dynamic encodingFilter =
                 aContext.addFilter("encodingFilter", new CharacterEncodingFilter());
         encodingFilter.setInitParameter("encoding", "UTF-8");
@@ -52,7 +52,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         encodingFilter.addMappingForUrlPatterns(null, true, "/*");
     }
 
-    private void registerHiddenFieldFilterHttp(ServletContext aContext){
+    private void registerHiddenFieldFilterHttp(ServletContext aContext) {
         aContext.addFilter("hiddenHttpMethodFilter", new HiddenHttpMethodFilter())
                 .addMappingForUrlPatterns(null, true, "/*");
     }
