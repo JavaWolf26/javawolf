@@ -19,13 +19,13 @@ public class User {
     @Column
     @NotEmpty(message = "FirstName should no be empty")
     @Size(min = 2, max = 30, message = "FirstName should be between 2 and 30 characters")
-    @Pattern(regexp = "[A-Z][a-zA-Z\\s\\-]*", message = "FirstName must begin with a capital letter")
+    @Pattern(regexp = "[А-ЯA-Z][а-яА-Яa-zA-Z\\s\\-]*", message = "FirstName must begin with a capital letter")
     private String firstName;
 
     @Column
     @NotEmpty(message = "LastName should no be empty")
     @Size(min = 2, max = 30, message = "LastName should be between 2 and 15 characters")
-    @Pattern(regexp = "[A-Z][a-zA-Z\\s\\-]*", message = "LastName must begin with a capital letter")
+    @Pattern(regexp = "[А-ЯA-Z][а-яА-Яa-zA-Z\\s\\-]*", message = "LastName must begin with a capital letter")
     private String lastName;
 
     @Column

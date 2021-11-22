@@ -5,6 +5,7 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
@@ -39,10 +40,19 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
-        registerHiddenFieldFilter(aServletContext);
+        registerCharacterEncodingFilterEncoding(aServletContext);
+        registerHiddenFieldFilterHttp(aServletContext);
     }
 
-    private void registerHiddenFieldFilter(ServletContext aContext){
+    private void registerCharacterEncodingFilterEncoding(ServletContext aContext){
+        FilterRegistration.Dynamic encodingFilter =
+                aContext.addFilter("encodingFilter", new CharacterEncodingFilter());
+        encodingFilter.setInitParameter("encoding", "UTF-8");
+        encodingFilter.setInitParameter("forceEncoding", "true");
+        encodingFilter.addMappingForUrlPatterns(null, true, "/*");
+    }
+
+    private void registerHiddenFieldFilterHttp(ServletContext aContext){
         aContext.addFilter("hiddenHttpMethodFilter", new HiddenHttpMethodFilter())
                 .addMappingForUrlPatterns(null, true, "/*");
     }

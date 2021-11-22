@@ -1,5 +1,6 @@
 package web.dao;
 
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
@@ -24,7 +25,10 @@ public class UserDaoImpl implements UserDao {
     public User getUserById(int id) {
         TypedQuery<User> tq = entityManager.createQuery("select u from User u where u.id = :id", User.class);
         tq.setParameter("id", id);
-        return tq.getResultList().stream().findAny().orElse(null);
+        User user = tq.getResultList().stream().findAny().orElse(null);
+        if (user == null) {
+            throw new ResourceNotFoundException("User with the specified id " + id + " does not exist.");
+        } else return user;
     }
 
     @Override
@@ -40,7 +44,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(int id, User updateUser) {
-        String query= "update users set firstName = ?, lastName=?, age=?, email=? where id = ?";
+        String query = "update users set firstName = ?, lastName=?, age=?, email=? where id = ?";
         Query nativeQuery = entityManager.createNativeQuery(query);
         nativeQuery.setParameter(1, updateUser.getFirstName());
         nativeQuery.setParameter(2, updateUser.getLastName());
