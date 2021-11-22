@@ -9,6 +9,7 @@
     <packaging>war</packaging>
     <properties>
         <spring.version>5.3.13</spring.version>
+        <spring-security.version>5.5.1</spring-security.version>
     </properties>
     <dependencies>
         <dependency>
@@ -37,6 +38,16 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>2.6.0</version>
@@ -44,7 +55,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-rest-webmvc</artifactId>
-            <version>3.3.3.RELEASE</version>
+            <version>3.6.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat</groupId>
